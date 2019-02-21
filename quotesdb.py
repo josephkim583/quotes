@@ -38,19 +38,22 @@ def read_from_db(theme, author):
     else:
         return (quotes[random.randint(0,len(quotes) - 1)])
 
-# read_from_db(None, None)
-#Hard coded quotesList table for now
+ 
+'''
+Hard coded quotesList table for now
 
-# create_table()
-# data_entry("Life", "Shaw", "Life isn't about finding yourself. Life is about creating yourself.")
-# data_entry("Life", "Lincoln", "In the end, it's not the years in your life that count. It's the life in your years.")
-# data_entry("Life", "Socrates", "An unexamined life is not worth living.")
-# data_entry("Life", "Bell", "When one door closes, another opens; but we often look so long and so regretfully upon the closed door that we do not see the one that has opened for us.")
-# data_entry("Life", "Lincoln", "Slavery sucks.")
 
-# data_entry("Love", "Jung", "You may hold my hand for a while, but you hold my heart forever.")
-# data_entry("Love", "Jung", "I know I am in love with you because my reality is finally better than my dreams.")
-# data_entry("Love", "Kim", "Love is great.")
-# data_entry("Love", "Kim", "I love my princess.")
+create_table()
+data_entry("Life", "Shaw", "Life isn't about finding yourself. Life is about creating yourself.")
+data_entry("Life", "Lincoln", "In the end, it's not the years in your life that count. It's the life in your years.")
+data_entry("Life", "Socrates", "An unexamined life is not worth living.")
+data_entry("Life", "Bell", "When one door closes, another opens; but we often look so long and so regretfully upon the closed door that we do not see the one that has opened for us.")
+data_entry("Life", "Lincoln", "Slavery sucks.")
+
+data_entry("Love", "Jung", "You may hold my hand for a while, but you hold my heart forever.")
+data_entry("Love", "Jung", "I know I am in love with you because my reality is finally better than my dreams.")
+data_entry("Love", "Kim", "Love is great.")
+data_entry("Love", "Kim", "I love my princess.")
+'''
 
 
