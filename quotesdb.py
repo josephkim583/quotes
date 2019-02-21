@@ -10,11 +10,33 @@ def create_table():
 
 #Adds data into the quotesList table
 def data_entry(theme, author, quote):
-    c.execute("INSERT INTO quotesList (theme, author, quote) VALUES (?, ?, ?)",
-               (theme, author, quote))
+    c.execute('''INSERT INTO quotesList (theme, author, quote) VALUES (:theme, :author, :quote)''', 
+            {'theme' : theme, 'author' : author, 'quote' : quote})
     conn.commit()
 
+#Given category parameters get a random quote related to the provided categories
+def read_from_db(theme, author):
+    quotes = []
 
+    if theme == None or author == None:
+        c.execute('''SELECT quote FROM quotesList WHERE theme = :theme 
+                                                    OR author = :author''',
+                                                    {'theme': theme, 'author' : author})
+    else:                                             
+        c.execute('''SELECT quote FROM quotesList WHERE theme = :theme 
+                                                    AND author = :author''',
+                                                    {'theme': theme, 'author' : author})
+
+    #Add all quotes with matching categories into quotes list    
+    for row in c.fetchall():
+        quotes.append(row[0])
+
+    if len(quotes) == 0:
+        return None
+    else:
+        print (quotes[random.randint(0,len(quotes) - 1)])
+
+read_from_db('Life', "Abraham Lincoln")
 #Hard coded quotesList table for now
 
 # create_table()
