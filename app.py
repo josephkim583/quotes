@@ -1,17 +1,16 @@
+import os
 from flask import Flask, jsonify, request
+from db import db
 import quotesdb
+from models.quote import *
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quotes.db')
 
 @app.route('/', methods=['GET'])
 def home():
     return "This shit gets quotes"
-
-'''
-I left two approaches of doing it. I think the second approach is the smarter choice, especially as I start adding more categories.
-I was also wondering what the pros and cons of each approach and when I should be using them. 
-'''    
-
+ 
 '''Approach 1'''
 # Takes no parameters and returns random quote
 @app.route('/api/generalSearch', methods=['GET'])
