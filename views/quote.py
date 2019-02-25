@@ -14,4 +14,4 @@ class QuoteView(MethodView):
         if error_message:
             return json.dumps({"error_message": error_message}), status
 
-        return json.dumps({"response": response.json()}), status
+        return json.dumps({"response": list(map(lambda x : x.json() if x else None, response))}), status

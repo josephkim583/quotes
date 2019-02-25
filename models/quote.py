@@ -16,6 +16,7 @@ class QuoteModel(db.Model, CommonModel):
 
     def json(self):
         return {
+            "id": self.id,
             "quote": self.quote,
             "theme": self.theme,
             "author": self.author
@@ -23,4 +24,5 @@ class QuoteModel(db.Model, CommonModel):
 
     @classmethod
     def find_by_category(cls, theme, author):
-        return cls.query.filter_by(theme = theme , author = author).first()
+        print(theme)
+        return cls.query.filter_by(theme=theme, author = author)
