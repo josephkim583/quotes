@@ -1,13 +1,14 @@
 import os
 from flask import Flask, jsonify, request
-from flask_admin import Admin
 from db import db
 import quotesdb
-from models.quote import *
+
+from models.quote import QuoteModel
+from controllers.quote import QuoteController
+from views.quote import QuoteView
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quotes.db')
-admin = Admin(app, name='quote', template_mode='bootstrap3')
 
 @app.route('/', methods=['GET'])
 def home():
@@ -19,32 +20,16 @@ def home():
 def general_search_quote():
     return quotesdb.read_from_db("None", "None") 
 
-# Takes theme parameter and returns random quote with related theme
-@app.route('/api/themeSearch/<theme>', methods = ['GET'])
-def theme_search_quote(theme):
-    return quotesdb.read_from_db(theme, "None")
-
-# Takes author parameter and returns random quote with related author
-@app.route('/api/authorSearch/<author>', methods = ['GET'])
-def author_search_quote(author):
-    return quotesdb.read_from_db("None", author)
-
 # Takes theme and author parameters and returns random quote with related theme and author
-@app.route('/api/allCategorySearch/<theme>/<author>', methods = ['GET'])
+@app.route('/api/allCategorySearch/<string:theme>/<string:author>', methods = ['GET'])
 def category_search_quote(theme, author):
-    return quotesdb.read_from_db(theme, author)
+    return QuoteView.get_quote(theme, author)
 
-
-'''Approach 2'''
-# Takes in theme and author arguments. If not provided, then are defaulted to None
-@app.route('/api/categorySearch', methods = ['GET'])
-def category_quote():
-    theme = author = None
-    if 'theme' in request.args:
-        theme = request.args['theme']
-    if 'author' in request.args:
-        author = request.args['author']
-    return quotesdb.read_from_db(theme, author)
 
 if __name__ == '__main__':
+    db.init_app(app)
+    @app.before_first_request
+    def create_tables():
+        db.create_all()
+
     app.run(debug = True)

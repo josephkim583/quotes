@@ -2,10 +2,10 @@ from models.common import CommonModel
 from db import db
 
 class QuoteModel(db.Model, CommonModel):
-    __tablename__ = 'quotes'
+    __tablename__ = 'quotesList'
 
     id = db.Column(db.Integer, primary_key=True)
-    quote = db.Column(db.String(255), primary_key = True)
+    quote = db.Column(db.String(255))
     theme = db.Column(db.String(255))
     author = db.Column(db.String(255))
 
@@ -23,4 +23,4 @@ class QuoteModel(db.Model, CommonModel):
 
     @classmethod
     def find_by_category(cls, theme, author):
-        return cls.query.filter_by(theme = theme , author = author).all()
+        return cls.query.filter_by(theme = theme , author = author).first()

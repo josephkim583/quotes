@@ -6,23 +6,12 @@ import json
 
 class QuoteView(MethodView):
 
-    req_params = ['theme', 'category']
+    req_params = ['theme', 'author']
 
     @classmethod
-    def get_quote(cls, theme, category):
-        error_message, status, response = QuoteController.get_quote(theme, category)
-
+    def get_quote(cls, theme, author):
+        error_message, status, response = QuoteController.get_quote(theme, author)
         if error_message:
             return json.dumps({"error_message": error_message}), status
 
-        return json.dumps({"response": response.json()}), status
-
-
-
-     @classmethod
-    def get_accord(cls, name):
-        error_message, status, response = AccordController.get_accord(name)
-
-        if error_message:
-            return json.dumps({"error_message": error_message}), status
         return json.dumps({"response": response.json()}), status
