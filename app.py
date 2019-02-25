@@ -1,11 +1,13 @@
 import os
 from flask import Flask, jsonify, request
+from flask_admin import Admin
 from db import db
 import quotesdb
 from models.quote import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quotes.db')
+admin = Admin(app, name='quote', template_mode='bootstrap3')
 
 @app.route('/', methods=['GET'])
 def home():
