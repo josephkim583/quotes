@@ -25,4 +25,4 @@ class QuoteModel(db.Model, CommonModel):
     @classmethod
     def find_by_category(cls, theme, author):
         print(theme)
-        return cls.query.filter_by(theme=theme, author = author)
+        return cls.query.filter_by(theme=theme, author = author).all()
