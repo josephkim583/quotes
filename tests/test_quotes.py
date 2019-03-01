@@ -28,9 +28,7 @@ class BasicTests(unittest.TestCase):
 
     def test_no_quotes(self):
         get_quote = self.app.get('/api/allCategorySearch/Life/Bob')
-        self.assertEqual (get_quote.status_code, 1000)
-        data_get_quote = json.loads(get_quote.data.decode())
-        self.assertEqual(data_get_quote['error_message'], 'No quotes found')
+        self.assertEqual (get_quote.status_code, 204)
 
     def test_get_quotes(self):
         get_quote = self.app.get('/api/allCategorySearch/Life/Lincoln')

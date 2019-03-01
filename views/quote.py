@@ -14,6 +14,6 @@ class QuoteView(MethodView):
         if error_message:
             return json.dumps({"error_message": error_message}), status
         if len(response) == 0:
-            return json.dumps({"error_message": "No quotes found"}), 1000
+            return json.dumps({"error_message": "No quotes found"}), 204
         index = randint(0, (len(response) - 1))
         return json.dumps({"response": response[index].json()}), status
