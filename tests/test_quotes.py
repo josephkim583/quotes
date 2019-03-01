@@ -26,13 +26,20 @@ class BasicTests(unittest.TestCase):
     def tearDown(self):
         pass
 
+    def test_no_quotes(self):
+        get_quote = self.app.get('/api/allCategorySearch/Life/Bob')
+        self.assertEqual (get_quote.status_code, 1000)
+        data_get_quote = json.loads(get_quote.data.decode())
+        self.assertEqual(data_get_quote['error_message'], 'No quotes found')
 
     def test_get_quotes(self):
         get_quote = self.app.get('/api/allCategorySearch/Life/Lincoln')
+        self.assertEqual (get_quote.status_code, 200)
         data_get_quote = json.loads(get_quote.data.decode())
         self.assertEqual(len(data_get_quote), 1)
         self.assertEqual(len(data_get_quote['response']), 4)
         self.assertEqual(data_get_quote['response']['quote'] in list_of_quotes, True)
+        self.assertEqual(data_get_quote['response']['quote'], 'Slavery sucks')
 
 
 if __name__ == '__main__':
