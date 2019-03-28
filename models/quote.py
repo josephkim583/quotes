@@ -1,21 +1,20 @@
 from db import db
 
 class QuoteModel(db.Model):
-    __tablename__ = 'quotesList'
+    __tablename__ = 'webquotes'
 
-    id = db.Column(db.Integer, primary_key=True)
-    quote = db.Column(db.String(255))
+    # id = db.Column(db.Integer, primary_key=True)
+    quote = db.Column(db.String(255), primary_key=True)
     theme = db.Column(db.String(255))
     author = db.Column(db.String(255))
 
-    def __init__(self, quote, theme, author):
+    def __init__(self, id, quote, theme, author):
         self.quote = quote
         self.theme = theme
         self.author = author
 
     def json(self):
         return {
-            "id": self.id,
             "quote": self.quote,
             "theme": self.theme,
             "author": self.author

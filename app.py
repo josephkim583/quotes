@@ -8,7 +8,7 @@ from controllers.quote import QuoteController
 from views.quote import QuoteView
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quotes.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///webquotes.db')
 
 @app.route('/', methods=['GET'])
 def home():

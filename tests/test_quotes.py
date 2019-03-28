@@ -7,7 +7,7 @@ from app import app
 from db import db
 import json
 
-TEST_DB = 'quotes.db'
+TEST_DB = 'webquotes.db'
 
 list_of_quotes = ['Love is great', 'Fuck you', 'Slavery sucks', 'Code as clean as my room',
                   'SEX', 'Money brings happiness', 'Here he is at 19 getting laid', 'Black people have big dicks']
@@ -17,7 +17,7 @@ class BasicTests(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         app.config['DEBUG'] = False
-        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///quotes.db')
+        app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///webquotes.db')
         self.app = app.test_client()
         db.init_app(app)
         # db.drop_all(app=app)

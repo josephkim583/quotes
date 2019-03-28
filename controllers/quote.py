@@ -9,7 +9,7 @@ class QuoteController():
         try:
             target_quote = QuoteModel.find_by_category(theme, author)
             if len(target_quote) == 0:
-                return "", 200, None
+                return "", 200, "No quotes were found"
             else:
                 index = randint(0, (len(target_quote) - 1))
                 quote = target_quote[index]
