@@ -1,7 +1,6 @@
-from models.common import CommonModel
 from db import db
 
-class QuoteModel(db.Model, CommonModel):
+class QuoteModel(db.Model):
     __tablename__ = 'quotesList'
 
     id = db.Column(db.Integer, primary_key=True)
