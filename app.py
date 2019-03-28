@@ -14,12 +14,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:/
 def home():
     return "This shit gets quotes"
  
-'''Approach 1'''
-# Takes no parameters and returns random quote
-@app.route('/api/generalSearch', methods=['GET'])
-def general_search_quote():
-    return quotesdb.read_from_db("None", "None") 
-
 # Takes theme and author parameters and returns random quote with related theme and author
 @app.route('/api/allCategorySearch/<string:theme>/<string:author>', methods = ['GET'])
 def category_search_quote(theme, author):
