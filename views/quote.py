@@ -14,4 +14,12 @@ class QuoteView(MethodView):
 
         if error_message:
             return json.dumps({"error_message": error_message}), status
-        return json.dumps({"response": response}), status
+        return json.dumps({"response": response}), status   
+
+    @classmethod
+    def enter_quote(cls, theme, author, quote):
+        # error_message, status, response = QuoteController.enter_quote(theme, author, quote)
+
+        # if error_message:
+        #     return json.dumps({"error_message": error_message}), status
+        return json.dumps({"response": 'Success!'})

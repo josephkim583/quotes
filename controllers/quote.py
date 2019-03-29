@@ -16,4 +16,3 @@ class QuoteController():
         except:
             return "Internal System Error", 500, None
         return "", 200, quote.json()
-

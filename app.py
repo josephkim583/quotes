@@ -15,10 +15,13 @@ def home():
     return "This shit gets quotes"
  
 # Takes theme and author parameters and returns random quote with related theme and author
-@app.route('/api/allCategorySearch/<string:theme>/<string:author>', methods = ['GET'])
-def category_search_quote(theme, author):
+@app.route('/searchQuote/<string:theme>/<string:author>', methods = ['GET'])
+def search_quote(theme, author):
     return QuoteView.get_quote(theme, author)
 
+@app.route('/enterQuote/<string:theme>/<string:author>/<string:quote>', methods = ['POST'])
+def enter_quote(theme, author, quote):
+    return QuoteView.enter_quote(theme, author, quote)
 
 if __name__ == '__main__':
     db.init_app(app)
