@@ -19,9 +19,9 @@ def home():
 def search_quote(theme, author):
     return QuoteView.get_quote(theme, author)
 
-@app.route('/enterQuote/<string:theme>/<string:author>/<string:quote>', methods = ['POST'])
-def enter_quote(theme, author, quote):
-    return QuoteView.enter_quote(theme, author, quote)
+@app.route('/enterQuote', methods = ['POST'])
+def enter_quote():
+    return QuoteView.enter_quote()
 
 if __name__ == '__main__':
     db.init_app(app)

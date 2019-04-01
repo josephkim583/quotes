@@ -18,12 +18,11 @@ class QuoteController():
         return "", 200, quote.json()
 
     @classmethod
-    def enter_quote(cls, theme, author, quote):
+    def enter_quote(cls, data):
         try:
-            new_quote = QuoteModel(theme, author, quote)
+            new_quote = QuoteModel(data["theme"], data["author"], data["quote"])
             new_quote.save_to_db()
         except:
-            cls.logger.exception ("Error in adding new quote")
             return "Internal Server Error", 500, None
 
         return "", 201, None
