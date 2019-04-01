@@ -1,6 +1,7 @@
 from db import db
+from models.common import CommonModel
 
-class QuoteModel(db.Model):
+class QuoteModel(db.Model, CommonModel):
     __tablename__ = 'webquotes'
 
     quote = db.Column(db.String(255), primary_key=True)
@@ -22,9 +23,3 @@ class QuoteModel(db.Model):
     @classmethod
     def find_by_category(cls, theme, author):
         return cls.query.filter_by(theme=theme, author = author).all()
-
-    @classmethod
-    def save_to_db(cls):
-        print ("HERE?")
-        return None
-
