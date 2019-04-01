@@ -4,7 +4,6 @@ from sqlalchemy import desc
 class CommonModel():
 
     def save_to_db(self):
-        print ("ASDFHASDFHKASDFHKASHDF")
         db.session.add(self)
         db.session.commit()
 

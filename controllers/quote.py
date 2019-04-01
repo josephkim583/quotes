@@ -20,8 +20,9 @@ class QuoteController():
     @classmethod
     def enter_quote(cls, data):
         try:
-            new_quote = QuoteModel(data["theme"], data["author"], data["quote"])
-            new_quote.save_to_db()
+            new_quote = QuoteModel(data["quote"], data["theme"], data["author"])
+            new_quote.save_to_db()         
+
         except:
             return "Internal Server Error", 500, None
 
