@@ -9,9 +9,6 @@ import json
 
 TEST_DB = 'webquotes.db'
 
-list_of_quotes = ['Love is great', 'Fuck you', 'Slavery sucks', 'Code as clean as my room',
-                  'SEX', 'Money brings happiness', 'Here he is at 19 getting laid', 'Black people have big dicks']
-
 class BasicTests(unittest.TestCase):
 
     def setUp(self):
@@ -27,20 +24,33 @@ class BasicTests(unittest.TestCase):
         pass
 
     def test_no_quotes(self):
-        get_quote = self.app.get('/api/allCategorySearch/Life/Bob')
+        get_quote = self.app.get('/searchQuote/Life/Fuck')
         data_get_quote = json.loads(get_quote.data.decode())
         self.assertEqual (get_quote.status_code, 200)
-        self.assertEqual (data_get_quote['response'], None)
+        self.assertEqual (data_get_quote['response'], 'No quotes were found')
 
     def test_get_quotes(self):
-        get_quote = self.app.get('/api/allCategorySearch/Life/Lincoln')
+        get_quote = self.app.get('/searchQuote/Life/Joseph')
         self.assertEqual (get_quote.status_code, 200)
         data_get_quote = json.loads(get_quote.data.decode())
-        self.assertEqual(len(data_get_quote), 1)
-        self.assertEqual(len(data_get_quote['response']), 4)
-        self.assertEqual(data_get_quote['response']['quote'] in list_of_quotes, True)
-        self.assertEqual(data_get_quote['response']['quote'], 'Slavery sucks')
+        self.assertEqual(data_get_quote['response']['quote'], 'WTF')
 
+    def test_make_quote(self):
+        new_quote= self.app.post('/enterQuote', data= {
+                                        "theme": "Life",
+                                        "author": "Mark",
+                                        "quote": "My code as clean as my room"
+                                    }
+                                )
+        self.assertEqual(new_quote.status_code, 201)
+
+    def test_make_wrong_quote(self):
+        new_quote= self.app.post('/enterQuote', data= {
+                                        "theme": "Life",
+                                        "author": "Mark",
+                                    }
+                                )
+        self.assertEqual(new_quote.status_code, 400)
 
 if __name__ == '__main__':
     unittest.main()
