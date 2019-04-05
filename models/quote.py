@@ -1,10 +1,10 @@
 from db import db
+from models.common import CommonModel
 
-class QuoteModel(db.Model):
-    __tablename__ = 'quotesList'
+class QuoteModel(db.Model, CommonModel):
+    __tablename__ = 'webquotes'
 
-    id = db.Column(db.Integer, primary_key=True)
-    quote = db.Column(db.String(255))
+    quote = db.Column(db.String(255), primary_key=True)
     theme = db.Column(db.String(255))
     author = db.Column(db.String(255))
 
@@ -15,7 +15,6 @@ class QuoteModel(db.Model):
 
     def json(self):
         return {
-            "id": self.id,
             "quote": self.quote,
             "theme": self.theme,
             "author": self.author
